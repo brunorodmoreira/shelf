@@ -5,6 +5,7 @@ import { Loading, useTreePath } from 'vtex.render-runtime'
 import { useDevice } from 'vtex.device-detector'
 import { useCssHandles } from 'vtex.css-handles'
 import { ProductListContext } from 'vtex.product-list-context'
+import { withRuntimeContext } from 'vtex.render-runtime'
 
 import OrdenationTypes, { getOrdenationValues } from './utils/OrdenationTypes'
 import ProductList from './components/ProductList'
