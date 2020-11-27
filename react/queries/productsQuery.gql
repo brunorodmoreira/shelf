@@ -7,6 +7,7 @@ query Products(
   $to: Int
   $hideUnavailableItems: Boolean = false
   $skusFilter: ItemsFilter = ALL_AVAILABLE
+  $searchState: String
 ) {
   products(
     category: $category
@@ -16,6 +17,7 @@ query Products(
     from: $from
     to: $to
     hideUnavailableItems: $hideUnavailableItems
+    searchState: $searchState
   ) @context(provider: "vtex.search-graphql") {
     cacheId
     productId
