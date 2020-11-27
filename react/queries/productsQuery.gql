@@ -17,7 +17,6 @@ query Products(
     from: $from
     to: $to
     hideUnavailableItems: $hideUnavailableItems
-    searchState: $searchState
   ) @context(provider: "vtex.search-graphql") {
     cacheId
     productId
