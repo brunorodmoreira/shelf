@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import React, { useMemo } from 'react'
-import { graphql } from 'react-apollo'
+import { compose, graphql } from 'react-apollo'
 import { Loading, useTreePath } from 'vtex.render-runtime'
 import { useDevice } from 'vtex.device-detector'
 import { useCssHandles } from 'vtex.css-handles'
@@ -107,6 +107,7 @@ const options = {
     specificationFilters = [],
     maxItems = ProductList.defaultProps.maxItems,
     skusFilter,
+    runtime,
   }) => ({
     ssr: true,
     variables: {
@@ -118,11 +119,15 @@ const options = {
       to: maxItems - 1,
       hideUnavailableItems: toBoolean(hideUnavailableItems),
       skusFilter,
+      ...(runtime && runtime.query && runtime.query.searchState && { searchState: runtime.query.searchState })
     },
   }),
 }
 
-const EnhancedShelf = graphql(productsQuery, options)(Shelf)
+const EnhancedShelf = compose(
+  withRuntimeContext,
+  graphql(productsQuery, options)
+)(Shelf)
 
 EnhancedShelf.schema = {
   title: 'admin/editor.shelf.title',
